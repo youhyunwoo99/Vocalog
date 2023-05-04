@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/mypage"
+        android:enabled="true"
+        android:icon="@drawable/ic_home"
+        android:title="홈"
+        app:showAsAction="always"
+        />
+    <item
+        android:id="@+id/testing"
+        android:enabled="true"
+        android:icon="@drawable/ic_settings"
+        android:title="테스트"
+        app:showAsAction="always"
+        />
+    <item
+        android:id="@+id/reminding"
+        android:enabled="true"
+        android:icon="@drawable/ic_info"
+        android:title="리마인딩"
+        app:showAsAction="always"
+        />
+    <item
+        android:id="@+id/memorizing"
+        android:enabled="true"
+        android:icon="@drawable/ic_info"
+        android:title="메모라이징"
+        app:showAsAction="always"
+        />
+</menu>
