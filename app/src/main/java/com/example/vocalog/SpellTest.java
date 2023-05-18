@@ -39,8 +39,18 @@ public class SpellTest extends AppCompatActivity {
         button2.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), Test_Spell.class);
-                startActivity(intent);
+                //선택한 항목에 따라 다른 창으로 이동하는 코드
+                String selectedItem = textView.getText().toString();
+                if(selectedItem.equals("토익영단어")) {
+                    //토익영단어를 선택한 경우
+                    Intent intent = new Intent(getApplicationContext(), Test_Spell.class);
+                    startActivity(intent);
+                }
+                else if (selectedItem.equals("전공영단어")) {
+                    //전공영단어를 선택한 경우
+                    Intent intent = new Intent(getApplicationContext(), Test_Spell.class);
+                    startActivity(intent);
+                }//이 부분에서 Test_Spell부분에 토익과 전공영단어 클래스를 새로 만들어 줘야한다.
             }
         });
         textView = (TextView) findViewById(R.id.textView);
