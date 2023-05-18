@@ -8,12 +8,12 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-public class Test_Spell extends AppCompatActivity {
+public class toeic_meaning_test extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_test_spell);
+        setContentView(R.layout.activity_toeic_meaning_test);
 
         Button button = findViewById(R.id.button_back);
         button.setOnClickListener(new View.OnClickListener(){

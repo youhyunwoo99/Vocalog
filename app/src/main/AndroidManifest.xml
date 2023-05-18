@@ -12,7 +12,16 @@
         android:theme="@style/Theme.VocaLog"
         tools:targetApi="31">
         <activity
-            android:name=".Test_Spell"
+            android:name=".toeic_meaning_test"
+            android:exported="false" />
+        <activity
+            android:name=".major_meaning_test"
+            android:exported="false" />
+        <activity
+            android:name=".Toeic_Spell_Test"
+            android:exported="false" />
+        <activity
+            android:name=".Major_Spell_Test"
             android:exported="false" />
         <activity
             android:name=".MeaningTest"
