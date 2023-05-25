@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/reminding_wordlist"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="#E9F7FF"
+    android:clipToOutline="true">
+
+
+    <!--맨위에 보드이름이랑 뒤로가기-->
+    <RelativeLayout
+        android:id="@+id/rectangle_1"
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:background="@drawable/reminding_rectangle_1"
+        android:elevation="3dp">
+
+        <RelativeLayout
+            android:id="@+id/ic_round_ar"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="12.5dp">
+
+            <View
+                android:id="@+id/ar_vector"
+                android:layout_width="17dp"
+                android:layout_height="25dp"
+                android:layout_centerInParent="true"
+                android:background="@drawable/reminding_back" />
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/page_id"
+            android:layout_width="200dp"
+            android:layout_height="20dp"
+            android:layout_centerInParent="true"
+            android:gravity="top"
+            android:text="2023 대학수학능력시험..."
+            android:textAppearance="@style/text_id"
+            android:textColor="@color/white" />
+
+    </RelativeLayout>
+
+
+    <!--보드안에 워드리스트-->
+    <RelativeLayout
+        android:id="@+id/group_13"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/rectangle_1">
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="80dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/professor"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginLeft="20dp"
+                        android:gravity="left"
+                        android:text="Professor"
+                        android:textAppearance="@style/wordsize" />
+
+                    <TextView
+                        android:id="@+id/some_id"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginLeft="100dp"
+                        android:text="교수"
+                        android:textAppearance="@style/wordsize" />
+
+                    <View
+                        android:id="@+id/ph_x_bold"
+                        android:layout_width="25dp"
+                        android:layout_height="25dp"
+                        android:background="@drawable/reminding_x_mark"
+                        android:layout_gravity="center"
+                        android:layout_marginLeft="120dp"/>
+
+                </LinearLayout>
+                <View
+                    android:id="@+id/line"
+                    android:layout_width="match_parent"
+                    android:layout_height="3dp"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentTop="true"
+                    android:background="@drawable/reminding_line" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="80dp"
+                    android:orientation="horizontal"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="80dp"
+                    android:orientation="horizontal"/>
+
+            </LinearLayout>
+        </ScrollView>
+    </RelativeLayout>
+
+
+    <!--사전찾는 돋보기버튼-->
+    <RelativeLayout
+        android:id="@+id/material_sy"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="350dp"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="660dp"
+        android:background="@drawable/reminding_circle"
+        >
+        <View
+            android:id="@+id/search_icon"
+            android:layout_width="33dp"
+            android:layout_height="33dp"
+            android:layout_centerInParent="true"
+            android:background="@drawable/reminding_search_icon" />
+
+    </RelativeLayout>
+
+
+
+</RelativeLayout>
