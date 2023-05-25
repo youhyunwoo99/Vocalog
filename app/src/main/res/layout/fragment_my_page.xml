@@ -23,12 +23,22 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="8dp" />
 
+    <!-- 수정된 버튼 위치 -->
+    <Button
+        android:id="@+id/profileButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Profile"
+        android:layout_below="@id/profileNameTextView"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="8dp" />
+
     <Button
         android:id="@+id/button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="My V-Log"
-        android:layout_below="@id/profileNameTextView"
+        android:layout_below="@id/profileButton"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="8dp" />
 
