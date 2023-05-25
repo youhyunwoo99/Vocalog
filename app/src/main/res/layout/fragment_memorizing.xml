@@ -24,5 +24,4 @@
             android:textStyle="bold"
             android:backgroundTint="#E9F7FF"/>
     </LinearLayout>
-
 </ScrollView>

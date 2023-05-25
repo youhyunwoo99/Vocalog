@@ -13,9 +13,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageButton;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
+
 
 public class Memorizing extends Fragment {
 
@@ -62,7 +61,7 @@ public class Memorizing extends Fragment {
     private void addButton(String buttonText) {
         Button newButton = new Button(getActivity());
         newButton.setText(buttonText);
-        newButton.setBackgroundResource(R.drawable.button);
+        newButton.setBackgroundResource(R.drawable.board_button);
         newButton.setTextSize(TypedValue.COMPLEX_UNIT_SP, 20);
         newButton.setTextColor(Color.parseColor("#566065"));
         newButton.setClickable(true);
@@ -87,9 +86,11 @@ public class Memorizing extends Fragment {
     }
 
     private void openOtherActivity(int buttonId) {
-        Intent intent = new Intent(getActivity(), board_main.class);
-        intent.putExtra("buttonId", buttonId);
-        startActivity(intent);
+        String boardTitle = ((Button)buttonContainer.findViewById(buttonId)).getText().toString();
 
+        Intent intent = new Intent(getActivity(), board_main.class);
+        intent.putExtra("boardId", buttonId);
+        intent.putExtra("boardTitle", boardTitle);
+        startActivity(intent);
     }
 }
