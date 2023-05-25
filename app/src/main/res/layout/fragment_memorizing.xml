@@ -1,18 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Memorizing">
+    android:background="#E9F7FF"
+    android:id="@+id/memorizingScrollView">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:layout_width="match_parent"
+    <LinearLayout
+        android:id="@+id/boardList"
+        android:orientation="vertical"
         android:layout_height="match_parent"
-        android:text="memorizing"
-        android:textSize="30sp"
-        android:layout_gravity="center"
-        android:gravity="center_horizontal"
-        />
+        android:layout_width="match_parent">
 
-</FrameLayout>
+        <Button
+            android:id="@+id/btn_createBoard"
+            android:layout_width="1000px"
+            android:layout_height="500px"
+            android:layout_gravity="center"
+            android:layout_marginTop="40px"
+            android:text="+보드 추가하기"
+            android:textColor="#566065"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:backgroundTint="#E9F7FF"/>
+    </LinearLayout>
+
+</ScrollView>
