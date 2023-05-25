@@ -15,11 +15,16 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 
+import com.google.firebase.analytics.FirebaseAnalytics;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
 
 public class Memorizing extends Fragment {
 
     private ViewGroup buttonContainer;
     private int buttonIndex = 0;
+
 
     @Nullable
     @Override
