@@ -8,6 +8,7 @@ import android.os.Bundle;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import android.util.TypedValue;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -77,7 +78,8 @@ public class Memorizing extends Fragment {
                 LinearLayout.LayoutParams.WRAP_CONTENT,
                 LinearLayout.LayoutParams.WRAP_CONTENT
         );
-        layoutParams.setMargins(getResources().getDimensionPixelSize(R.dimen.margin_left), getResources().getDimensionPixelSize(R.dimen.margin_top), 0 , 0);
+        layoutParams.gravity = Gravity.CENTER_HORIZONTAL;
+        layoutParams.setMargins(0, getResources().getDimensionPixelSize(R.dimen.margin_top), 0 , 0);
 
         buttonContainer.addView(newButton, layoutParams);
 
