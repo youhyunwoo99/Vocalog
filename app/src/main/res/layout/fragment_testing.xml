@@ -9,8 +9,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:id="@+id/acView"
-        >
+        android:id="@+id/acView" >
+
     <Button
         android:layout_width="1000px"
         android:layout_height="500px"
@@ -22,8 +22,7 @@
         android:width="3dp"
         android:textStyle="bold"
         android:textColor="#566065"
-        android:textSize="20sp"
-        />
+        android:textSize="20sp" />
 
     <Button
         android:layout_width="1000px"
@@ -36,8 +35,8 @@
         android:width="3dp"
         android:textStyle="bold"
         android:textColor="#566065"
-        android:textSize="20sp"
-        />
+        android:textSize="20sp" />
+
     <Button
         android:layout_width="1000px"
         android:layout_height="500px"
