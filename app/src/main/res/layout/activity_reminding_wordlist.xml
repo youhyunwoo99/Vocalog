@@ -129,6 +129,7 @@
         android:layout_marginTop="660dp"
         android:background="@drawable/reminding_circle"
         >
+
         <View
             android:id="@+id/search_icon"
             android:layout_width="33dp"
