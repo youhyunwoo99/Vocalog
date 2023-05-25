@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:background="#E9F7FF"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="#E9F7FF">
+
+        <Button
+            android:layout_width="300dp"
+            android:layout_height="200dp"
+            android:id="@+id/Test1"
+            android:text="5월 20일\nSpell 테스트 결과\n정답 : 14개\n오답 : 6개"
+            android:layout_gravity="center"
+            android:layout_marginTop="30dp"
+            android:backgroundTint="#E9F7FF"
+            android:width="3dp"
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            />
+
+        <Button
+            android:layout_width="300dp"
+            android:layout_height="200dp"
+            android:id="@+id/Test2"
+            android:text="5월 25일\nMeaning 테스트 결과\n정답 : 16개\n오답 : 4개"
+            android:layout_gravity="center"
+            android:layout_marginTop="30dp"
+            android:backgroundTint="#E9F7FF"
+            android:width="3dp"
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            />
+
+        <Button
+            android:layout_width="300dp"
+            android:layout_height="200dp"
+            android:id="@+id/Test3"
+            android:text="5월 26일\nSpell 테스트 결과\n정답 : 15개\n오답 : 5개"
+            android:layout_gravity="center"
+            android:layout_marginTop="30dp"
+            android:backgroundTint="#E9F7FF"
+            android:width="3dp"
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            />
+
+        <Button
+            android:layout_width="300dp"
+            android:layout_height="200dp"
+            android:id="@+id/Test4"
+            android:text="5월 28일\nMeaning 테스트 결과\n정답 : 18개\n오답 : 2개"
+            android:layout_gravity="center"
+            android:layout_marginTop="30dp"
+            android:backgroundTint="#E9F7FF"
+            android:width="3dp"
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            />
+
+        <Button
+            android:id="@+id/backButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="돌아가기"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_margin="16dp"
+            android:layout_gravity="center"/>
+
+    </LinearLayout>
+
+</ScrollView>

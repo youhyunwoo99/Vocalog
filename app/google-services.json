@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "513973614949",
+    "project_id": "vocalog-b26b6",
+    "storage_bucket": "vocalog-b26b6.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:513973614949:android:6ef38d5c58ab003c6c898c",
+        "android_client_info": {
+          "package_name": "com.example.vocalog"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "513973614949-7a1ms4gf17qac6ar273k082gg4mg966g.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyARs63OOk9e_Lu3ZtlaMxglVtr77GKCvpY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "513973614949-7a1ms4gf17qac6ar273k082gg4mg966g.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
