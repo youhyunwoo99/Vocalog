@@ -13,8 +13,6 @@
         android:id="@+id/rectangle_1"
         android:layout_width="match_parent"
         android:layout_height="55dp"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
         android:background="@drawable/reminding_rectangle_1"
         android:elevation="3dp">
 
@@ -27,8 +25,8 @@
             android:layout_marginLeft="10dp"
             android:layout_marginTop="12.5dp">
 
-            <View
-                android:id="@+id/ar_vector"
+            <Button
+                android:id="@+id/back"
                 android:layout_width="17dp"
                 android:layout_height="25dp"
                 android:layout_centerInParent="true"
@@ -37,13 +35,15 @@
 
         <TextView
             android:id="@+id/page_id"
-            android:layout_width="200dp"
-            android:layout_height="20dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:gravity="top"
-            android:text="2023 대학수학능력시험..."
-            android:textAppearance="@style/text_id"
-            android:textColor="@color/white" />
+            android:gravity="center"
+            android:text="0"
+            android:background="#566065"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:textColor="#E9F7FF"/>
 
     </RelativeLayout>
 
@@ -119,26 +119,16 @@
 
 
     <!--사전찾는 돋보기버튼-->
-    <RelativeLayout
-        android:id="@+id/material_sy"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_alignParentLeft="true"
-        android:layout_marginLeft="350dp"
-        android:layout_alignParentTop="true"
-        android:layout_marginTop="660dp"
-        android:background="@drawable/reminding_circle"
-        >
-
-        <View
-            android:id="@+id/search_icon"
-            android:layout_width="33dp"
-            android:layout_height="33dp"
-            android:layout_centerInParent="true"
-            android:background="@drawable/reminding_search_icon" />
-
-    </RelativeLayout>
-
-
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/dictionary"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginBottom="10dp"
+        android:layout_marginEnd="10dp"
+        android:background="#566065"
+        android:src="@drawable/search"/>
 
 </RelativeLayout>

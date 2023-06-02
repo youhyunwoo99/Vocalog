@@ -13,6 +13,7 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import android.widget.Button;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -35,6 +36,14 @@ public class board_main extends AppCompatActivity {
         wordlist.setId(boardId);
 
         FloatingActionButton btn_dictionary = findViewById(R.id.dictionary);
+
+        Button backButton = findViewById(R.id.back);
+        backButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
 
         btn_dictionary.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -98,4 +107,5 @@ public class board_main extends AppCompatActivity {
         save_word saveWord = new save_word(word, mean);
         databaseReference.child("voca").child(word).setValue(saveWord);
     }
+
 }

@@ -10,6 +10,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import android.util.TypedValue;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -32,7 +33,7 @@ public class Reminding extends Fragment {
     public View onCreateView(@Nullable LayoutInflater inflater, @Nullable ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_reminding, container, false);
-        Button btn_createBoard = view.findViewById(R.id.plus_vector);
+        Button btn_createBoard = view.findViewById(R.id.btn_createBoard);
         buttonContainer = view.findViewById(R.id.bord);
         btn_createBoard.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -55,7 +56,7 @@ public class Reminding extends Fragment {
             @Override
             public void onClick(DialogInterface dialogInterface, int which) {
                 String boardTitle = boardName.getText().toString();
-                addCustomView(boardTitle);
+                addButton(boardTitle);
             }
         });
 
@@ -64,60 +65,40 @@ public class Reminding extends Fragment {
         AlertDialog alertDialog = builder.setCancelable(false).create();
         alertDialog.show();
     }
-    private void addCustomView(String boardTitle) {
-        LayoutInflater inflater = (LayoutInflater) getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        final RelativeLayout customLayout = (RelativeLayout) inflater.inflate(R.layout.bord_view, null);
+    private void addButton(String buttonText) {
+        Button newButton = new Button(getActivity());
+        newButton.setText(buttonText);
+        newButton.setBackgroundResource(R.drawable.board_button);
+        newButton.setTextSize(TypedValue.COMPLEX_UNIT_SP, 20);
+        newButton.setTextColor(Color.parseColor("#566065"));
+        newButton.setClickable(true);
+        newButton.setId(buttonIndex);
+        buttonIndex++;
 
-        TextView boardName = (TextView) customLayout.findViewById(R.id.bord_name);
-        TextView boardCount = (TextView) customLayout.findViewById(R.id.bord_count);
-        Button deleteButton = (Button) customLayout.findViewById(R.id.delete);
+        LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.WRAP_CONTENT,
+                LinearLayout.LayoutParams.WRAP_CONTENT
+        );
+        layoutParams.gravity = Gravity.CENTER_HORIZONTAL;
+        layoutParams.setMargins(0, getResources().getDimensionPixelSize(R.dimen.margin_top), 0 , 0);
 
-        boardName.setText(boardTitle);
-        boardCount.setText(String.format("%d/50", buttonIndex + 1));
-        customLayout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                openOtherActivity(buttonIndex, boardTitle); // Passing boardTitle to openOtherActivity
-            }
-        });
+        buttonContainer.addView(newButton, layoutParams);
 
-        deleteButton.setOnClickListener(new View.OnClickListener() {
+        newButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
-                builder.setMessage("삭제하시겠습니까?")
-                        .setPositiveButton("예", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int id) {
-                                buttonContainer.removeView(customLayout);
-                            }
-                        })
-                        .setNegativeButton("아니오", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int id) {
-                                dialog.dismiss();
-                            }
-                        });
-                AlertDialog dialog = builder.create();
-                dialog.show();
+                int buttonId = view.getId();
+                openOtherActivity(buttonId);
             }
         });
-
-        RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(
-                RelativeLayout.LayoutParams.WRAP_CONTENT,
-                RelativeLayout.LayoutParams.WRAP_CONTENT
-        );
-        layoutParams.setMargins(0, getResources().getDimensionPixelSize(R.dimen.margin_top), 0, 0);
-
-        buttonContainer.addView(customLayout,layoutParams);
-
-        buttonIndex++;
     }
-    private void openOtherActivity(int buttonId, String boardTitle) {
+
+    private void openOtherActivity(int buttonId) {
+        String boardTitle = ((Button)buttonContainer.findViewById(buttonId)).getText().toString();
+
         Intent intent = new Intent(getActivity(), Reminding_wordlist.class);
-        intent.putExtra("buttonId", buttonId);
-        intent.putExtra("boardTitle", boardTitle); // Pass the boardTitle as an extra
+        intent.putExtra("boardId", buttonId);
+        intent.putExtra("boardTitle", boardTitle);
         startActivity(intent);
     }
-
 }
