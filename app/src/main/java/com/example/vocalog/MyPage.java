@@ -30,6 +30,7 @@ public class MyPage extends Fragment {
 
         // 버튼을 찾아옵니다.
         Button button = rootView.findViewById(R.id.button);
+        Button profile_button = rootView.findViewById(R.id.profileButton);
 
         // 버튼의 클릭 이벤트 리스너를 설정합니다.
         button.setOnClickListener(new View.OnClickListener() {
@@ -39,6 +40,16 @@ public class MyPage extends Fragment {
                 // 예를 들어, 다른 액티비티로 이동하는 코드를 작성할 수 있습니다.
                 Intent intent = new Intent(getActivity(), My_V_Log.class);
                 startActivity(intent);
+            }
+        });
+
+        profile_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // 다른 페이지로 이동하는 코드를 작성합니다.
+                // 예를 들어, 다른 액티비티로 이동하는 코드를 작성할 수 있습니다.
+                Intent intent1 = new Intent(getActivity(), profile.class);
+                startActivity(intent1);
             }
         });
 

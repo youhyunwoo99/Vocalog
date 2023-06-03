@@ -8,6 +8,7 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.util.TypedValue;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -35,6 +36,17 @@ public class board_main extends AppCompatActivity {
         wordlist.setId(boardId);
 
         FloatingActionButton btn_dictionary = findViewById(R.id.dictionary);
+
+        Button backButton = findViewById(R.id.back);
+
+        // 버튼의 클릭 이벤트 리스너를 설정합니다.
+        backButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // 액티비티를 종료하고 이전 화면으로 돌아갑니다.
+                finish();
+            }
+        });
 
         btn_dictionary.setOnClickListener(new View.OnClickListener() {
             @Override
