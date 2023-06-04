@@ -2,13 +2,17 @@ package com.example.vocalog;
 
 import static android.app.Activity.RESULT_OK;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import androidx.fragment.app.Fragment;
 
 import android.provider.MediaStore;
+import android.util.Base64;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,11 +20,13 @@ import android.widget.Button;
 import android.widget.CalendarView;
 import android.widget.ImageView;
 
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 
 public class MyPage extends Fragment {
 
     private final int REQUEST_PROFILE_PIC = 1;
+    ImageView myPageProfileImage;
 
     private void startProfileActivity() {
         Intent intent1 = new Intent(getActivity(), profile.class);
@@ -37,6 +43,8 @@ public class MyPage extends Fragment {
         CalendarView calendarView = rootView.findViewById(R.id.calendarView);
 
         // CalendarView의 이벤트 리스너를 설정합니다.
+        myPageProfileImage = rootView.findViewById(R.id.profileImageView);
+        loadProfileImage();
 
 
         calendarView.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
@@ -81,16 +89,40 @@ public class MyPage extends Fragment {
         if (requestCode == REQUEST_PROFILE_PIC) {
             if (resultCode == RESULT_OK) {
                 Uri imageUri = data.getData();
-                // 이미지를 사용하여 필요한 작업을 수행합니다.
-                // 예를 들어, ImageView에 이미지를 설정할 수 있습니다.
-                ImageView myPageProfileImage = getView().findViewById(R.id.profileImageView);
                 try {
                     Bitmap bitmap = MediaStore.Images.Media.getBitmap(getActivity().getContentResolver(), imageUri);
                     myPageProfileImage.setImageBitmap(bitmap);
+                    saveProfileImage(bitmap); // 이미지를 저장합니다.
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
             }
         }
     }
+
+    private void loadProfileImage() {
+        SharedPreferences sharedPreferences = getActivity().getSharedPreferences("MyPageProfile", Context.MODE_PRIVATE);
+        String imageString = sharedPreferences.getString("profile_image", "");
+
+        if (!imageString.equals("")) {
+            byte[] imageBytes = Base64.decode(imageString, Base64.DEFAULT);
+            Bitmap bitmap = BitmapFactory.decodeByteArray(imageBytes, 0, imageBytes.length);
+            myPageProfileImage.setImageBitmap(bitmap);
+        }
+    }
+
+    // 프로필 이미지를 저장하는 함수입니다.
+    private void saveProfileImage(Bitmap bitmap) {
+        SharedPreferences sharedPreferences = getActivity().getSharedPreferences("MyPageProfile", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+
+        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.PNG, 100, byteArrayOutputStream);
+        byte[] imageBytes = byteArrayOutputStream.toByteArray();
+        String imageString = Base64.encodeToString(imageBytes, Base64.DEFAULT);
+
+        editor.putString("profile_image", imageString);
+        editor.apply();
+    }
+
 }

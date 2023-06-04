@@ -29,8 +29,6 @@ public class profile extends AppCompatActivity {
         Button photoButton = findViewById(R.id.photo);
 
 
-
-
 // 버튼의 클릭 이벤트 리스너를 설정합니다.
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
