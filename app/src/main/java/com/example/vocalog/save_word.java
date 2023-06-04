@@ -1,29 +1,28 @@
 package com.example.vocalog;
-
 public class save_word {
-    String word;
-    String mean;
+    private String word;
+    private String mean;
+    private String boardTitle;
 
-    public save_word(){}
+    public save_word() {
+        // 기본 생성자 (Firebase에 데이터를 읽고 쓸 때 필요)
+    }
+
+    public save_word(String word, String mean, String boardId, String boardTitle) {
+        this.word = word;
+        this.mean = mean;
+        this.boardTitle = boardTitle;
+    }
 
     public String getWord() {
         return word;
-    }
-
-    public void setWord(String word) {
-        this.word = word;
     }
 
     public String getMean() {
         return mean;
     }
 
-    public void setMean(String mean) {
-        this.mean = mean;
-    }
-
-    public save_word(String word, String mean) {
-        this.word = word;
-        this.mean = mean;
+    public String getBoardTitle() {
+        return boardTitle;
     }
 }
