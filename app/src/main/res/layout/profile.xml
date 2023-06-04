@@ -46,6 +46,13 @@
         android:textStyle="bold" />
 
     <Button
+        android:id="@+id/profile"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="프로필 수정" />
+
+    <Button
         android:id="@+id/photo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -61,10 +68,6 @@
         app:layout_constraintStart_toStartOf="parent"
         android:layout_margin="50dp"
         android:layout_gravity="center"/>
-
-
-
-
 
 
 </LinearLayout>

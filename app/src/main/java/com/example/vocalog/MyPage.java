@@ -1,6 +1,7 @@
 package com.example.vocalog;
 
 import static android.app.Activity.RESULT_OK;
+import static android.content.Context.MODE_PRIVATE;
 
 import android.content.Context;
 import android.content.Intent;
@@ -19,6 +20,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CalendarView;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -27,6 +29,7 @@ public class MyPage extends Fragment {
 
     private final int REQUEST_PROFILE_PIC = 1;
     ImageView myPageProfileImage;
+    TextView profileNameTextView;
 
     private void startProfileActivity() {
         Intent intent1 = new Intent(getActivity(), profile.class);
@@ -37,6 +40,9 @@ public class MyPage extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
+
+
         View rootView = inflater.inflate(R.layout.fragment_my_page, container, false);
 
         // CalendarView를 찾아옵니다.
@@ -45,6 +51,10 @@ public class MyPage extends Fragment {
         // CalendarView의 이벤트 리스너를 설정합니다.
         myPageProfileImage = rootView.findViewById(R.id.profileImageView);
         loadProfileImage();
+
+        profileNameTextView = rootView.findViewById(R.id.profileNameTextView);
+        loadProfileName();
+
 
 
         calendarView.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
@@ -93,15 +103,28 @@ public class MyPage extends Fragment {
                     Bitmap bitmap = MediaStore.Images.Media.getBitmap(getActivity().getContentResolver(), imageUri);
                     myPageProfileImage.setImageBitmap(bitmap);
                     saveProfileImage(bitmap); // 이미지를 저장합니다.
+                    String name = data.getStringExtra("name");
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
             }
         }
     }
+    @Override
+    public void onResume() {
+        super.onResume();
 
+        // 현재 프로필 액티비티에서 받은 이름값이 저장되어 있는지 확인
+        SharedPreferences sharedPreferences = getActivity().getSharedPreferences("MySharedPref", MODE_PRIVATE);
+        String name = sharedPreferences.getString("name", "");
+
+        // SharedPreferences에서 이름값이 있으면 TextView 업데이트
+        if (!name.isEmpty()) {
+            profileNameTextView.setText(name);
+        }
+    }
     private void loadProfileImage() {
-        SharedPreferences sharedPreferences = getActivity().getSharedPreferences("MyPageProfile", Context.MODE_PRIVATE);
+        SharedPreferences sharedPreferences = getActivity().getSharedPreferences("MyPageProfile", MODE_PRIVATE);
         String imageString = sharedPreferences.getString("profile_image", "");
 
         if (!imageString.equals("")) {
@@ -111,9 +134,15 @@ public class MyPage extends Fragment {
         }
     }
 
+    private void loadProfileName() {
+        SharedPreferences sharedPreferences = getActivity().getSharedPreferences("ProfilePreferences", MODE_PRIVATE);
+        String name = sharedPreferences.getString("name", "IU");
+        profileNameTextView.setText(name);
+    }
+
     // 프로필 이미지를 저장하는 함수입니다.
     private void saveProfileImage(Bitmap bitmap) {
-        SharedPreferences sharedPreferences = getActivity().getSharedPreferences("MyPageProfile", Context.MODE_PRIVATE);
+        SharedPreferences sharedPreferences = getActivity().getSharedPreferences("MyPageProfile", MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
 
         ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
