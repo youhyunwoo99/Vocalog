@@ -92,11 +92,12 @@ public class Board_Spell_Tests extends AppCompatActivity {
                 String inputText = editText.getText().toString().trim();
 
                 save_word word = wordList.get(currentIndex);
-                if (inputText.equalsIgnoreCase(isWrongWordMode ? wrongWords.get(currentIndex) : word.getWord())) {
+                if (inputText.equalsIgnoreCase(isWrongWordMode ? wrongSpell.get(currentIndex) : word.getWord())) {
                     showAlertDialog("정답입니다!", "다음 단어로 넘어갑니다.");
 
                     if (isWrongWordMode) {
                         wrongWords.remove(currentIndex);
+                        wrongSpell.remove(currentIndex);
                         currentIndex--; // 틀린 단어의 경우, 인덱스를 감소시켜 다음 단어가 올바르게 표시되도록 설정
                     }
                 } else {
@@ -104,7 +105,8 @@ public class Board_Spell_Tests extends AppCompatActivity {
                     showAlertDialog("오답입니다.", message);
 
                     if (!isWrongWordMode) {
-                        wrongWords.add(word.getWord());
+                        wrongWords.add(word.getMean());
+                        wrongSpell.add(word.getWord());
                     }
                 }
 

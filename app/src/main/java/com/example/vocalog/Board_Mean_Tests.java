@@ -29,7 +29,7 @@ public class Board_Mean_Tests extends AppCompatActivity {
     private List<save_word> wordList;
     private int currentIndex;
 
-    private ArrayList<String> wrongWords;
+    private ArrayList<save_word> wrongWords;
     private boolean isWrongWordMode;
 
     @Override
@@ -88,8 +88,10 @@ public class Board_Mean_Tests extends AppCompatActivity {
             public void onClick(View v) {
                 String inputMeaning = inputText.getText().toString().trim();
 
-                save_word word = wordList.get(currentIndex);
-                if (inputMeaning.equalsIgnoreCase(isWrongWordMode ? wrongWords.get(currentIndex) : word.getMean())) {
+                save_word word = isWrongWordMode ? wrongWords.get(currentIndex) : wordList.get(currentIndex);
+                String wordMean = word.getMean(); // 현재 단어의 mean 값
+
+                if (inputMeaning.equalsIgnoreCase(wordMean)) {
                     showAlertDialog("정답입니다!", "다음 단어로 넘어갑니다.");
 
                     if (isWrongWordMode) {
@@ -101,7 +103,7 @@ public class Board_Mean_Tests extends AppCompatActivity {
                     showAlertDialog("오답입니다.", message);
 
                     if (!isWrongWordMode) {
-                        wrongWords.add(word.getMean());
+                        wrongWords.add(wordList.get(currentIndex)); // 오답을 기록할 때는 wordList에서 단어 전체를 가져옵니다.
                     }
                 }
 
@@ -125,7 +127,8 @@ public class Board_Mean_Tests extends AppCompatActivity {
 
     private void displayNextWord() {
         if (isWrongWordMode) {
-            wordTextView.setText(wrongWords.get(currentIndex));
+            save_word word = wrongWords.get(currentIndex);
+            wordTextView.setText(word.getWord());
         } else {
             save_word word = wordList.get(currentIndex);
             wordTextView.setText(word.getWord());
