@@ -17,6 +17,12 @@
         android:theme="@style/Theme.VocaLog"
         tools:targetApi="31">
         <activity
+            android:name=".Board_Mean_Tests"
+            android:exported="false" />
+        <activity
+            android:name=".Board_Spell_Tests"
+            android:exported="false" />
+        <activity
             android:name=".web_view"
             android:exported="false" />
         <activity

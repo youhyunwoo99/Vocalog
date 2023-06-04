@@ -1,32 +1,44 @@
 package com.example.vocalog;
 
-import static com.example.vocalog.R.id.button3;
-
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Adapter;
 import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.ArrayList;
+import java.util.List;
+
 public class MeaningTest extends AppCompatActivity {
     TextView textView;
-    String[] items = {"토익영단어", "전공영단어"};
+    Spinner spinner;
+    Button button1;
+    Button button2;
+    List<String> boardTitles = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_meaning_test);
-        Button button1 = findViewById(R.id.button2);
-        Button button2 = findViewById(R.id.button3);
+
+        textView = findViewById(R.id.textView);
+        spinner = findViewById(R.id.spinner);
+        button1 = findViewById(R.id.button2);
+        button2 = findViewById(R.id.button3);
+
         button1.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
@@ -39,33 +51,78 @@ public class MeaningTest extends AppCompatActivity {
         button2.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
-                //선택한 항목에 따라 다른 창으로 이동하는 코드
                 String selectedItem = textView.getText().toString();
-                if(selectedItem.equals("토익영단어")) {
-                    //토익영단어를 선택한 경우
-                    Intent intent = new Intent(getApplicationContext(), toeic_meaning_test.class);
-                    startActivity(intent);
-                }
-                else if (selectedItem.equals("전공영단어")) {
-                    //전공영단어를 선택한 경우
-                    Intent intent = new Intent(getApplicationContext(), major_meaning_test.class);
-                    startActivity(intent);
+                if (boardTitles.contains(selectedItem)) {
+                    DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("boards");
+                    Query query = databaseReference.orderByChild("name").equalTo(selectedItem);
+                    query.addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(DataSnapshot dataSnapshot) {
+                            if (dataSnapshot.exists()) {
+                                DataSnapshot firstChild = dataSnapshot.getChildren().iterator().next();
+                                String boardTitle = firstChild.child("name").getValue(String.class);
+                                Intent intent = new Intent(getApplicationContext(), Board_Mean_Tests.class);
+                                intent.putExtra("boardTitle", boardTitle);
+                                startActivity(intent);
+                            }
+                        }
+
+                        @Override
+                        public void onCancelled(DatabaseError databaseError) {
+                            // 에러 처리 로직
+                        }
+                    });
+                } else {
+                    Toast.makeText(getApplicationContext(), "보드를 선택해주세요.",
+                            Toast.LENGTH_LONG).show();
                 }
             }
         });
-        textView = (TextView) findViewById(R.id.textView2);
-        Spinner spinner = (Spinner) findViewById(R.id.spinner2);
+
+        // 파이어베이스에서 보드 제목들을 가져와서 스피너에 표시합니다.
+        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("boards");
+        databaseReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                boardTitles.clear();
+                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                    String boardTitle = snapshot.child("name").getValue(String.class);
+                    boardTitles.add(boardTitle);
+                }
+                setSpinnerAdapter();
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                // 에러 처리 로직을 추가하십시오.
+            }
+        });
+    }
+
+    private void setSpinnerAdapter() {
+        // Null 값을 처리하기 위해 임시로 사용할 대체 값
+        final String NULL_TITLE_VALUE = "1";
+
+        // Null 값을 처리하는 로직 추가
+        for (int i = 0; i < boardTitles.size(); i++) {
+            if (boardTitles.get(i) == null) {
+                boardTitles.set(i, NULL_TITLE_VALUE);
+            }
+        }
+
         ArrayAdapter<String> adapter = new ArrayAdapter<>(
-                this, android.R.layout.simple_spinner_item, items);
+                this, android.R.layout.simple_spinner_item, boardTitles);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
 
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener(){
-
             @Override
             public void onItemSelected(AdapterView adapterView, View view, int position, long id){
-                textView.setText(items[position]);
+                String selectedTitle = boardTitles.get(position);
+                // 대체 값인 경우에는 textView에 빈 문자열로 설정
+                textView.setText(selectedTitle.equals(NULL_TITLE_VALUE) ? "" : selectedTitle);
             }
+
             @Override
             public void onNothingSelected(AdapterView adapterView){
                 textView.setText("");
